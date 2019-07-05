@@ -1,0 +1,27 @@
+namespace HA300;
+
+entity OrgEmployees_00
+{
+   key EmployeeId     : String(10);
+       FirstName      : String(40);
+       MiddleName     : String(40);
+       LastName       : String(40);
+       Initials       : String(10);
+       Sex            : String(1);
+       Language       : String(1);
+       PhoneNumber    : String(30);
+       EmailAddress   : String(255);
+       LoginName      : String(20);
+       AddressId      : String(10);
+       StartDate      : LocalDate;
+       EndDate        : LocalDate;
+       Currency       : String(5);
+       SalaryAmount   : Decimal(15, 2);
+       AccountNumber  : String(10);
+       BankId         : String(10);
+       BankName       : String(255);
+       EmployeePicURL : String(255);
+       ManagerId      : String(10);
+       OrgUnitId      : String(10);
+}
+technical configuration {column store;};

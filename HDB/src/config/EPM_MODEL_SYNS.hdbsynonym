@@ -1,0 +1,74 @@
+{
+  "HA300::SNWD_BP": {
+    "target": {
+      "object": "SNWD_BP",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_CONTACT": {
+    "target": {
+      "object": "SNWD_CONTACT",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_BP_EM": {
+    "target": {
+      "object": "SNWD_BP_EM",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_PO": {
+    "target": {
+      "object": "SNWD_PO",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_PO_I": {
+    "target": {
+      "object": "SNWD_PO_I",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_PD": {
+    "target": {
+      "object": "SNWD_PD",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_SO": {
+    "target": {
+      "object": "SNWD_SO",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_SO_I": {
+    "target": {
+      "object": "SNWD_SO_I",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_AD": {
+    "target": {
+      "object": "SNWD_AD",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::SNWD_EMPLOYEES": {
+    "target": {
+      "object": "SNWD_EMPLOYEES",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::DOM_MEPRF": {
+    "target": {
+      "object": "DOM_MEPRF",
+      "schema": "EPM_MODEL"
+    }
+  },
+  "HA300::DOM_MEPRFT": {
+    "target": {
+      "object": "DOM_MEPRFT",
+      "schema": "EPM_MODEL"
+    }
+  }
+}

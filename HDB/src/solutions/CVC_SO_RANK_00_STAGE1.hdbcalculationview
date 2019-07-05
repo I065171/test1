@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="HA300::CVC_SO_RANK_00_STAGE1" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" visibility="reportingEnabled" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Sales Orders Rank"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::CVCS_SO">
+    <resourceUri>HA300::CVCS_SO</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:RankView" id="Rank_1">
+    <viewAttributes>
+      <viewAttribute id="COUNTRY" measureType="simple">
+        <descriptions defaultDescription="COUNTRY"/>
+      </viewAttribute>
+      <viewAttribute id="PRODUCT_ID" measureType="simple">
+        <descriptions defaultDescription="PRODUCT_ID"/>
+      </viewAttribute>
+      <viewAttribute id="GROSS_AMOUNT" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="GROSS_AMOUNT"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::CVCS_SO">
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="GROSS_AMOUNT" source="GROSS_AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_ID" source="PRODUCT_ID"/>
+    </input>
+    <windowFunction>
+      <partitionViewAttributeName>COUNTRY</partitionViewAttributeName>
+      <order byViewAttributeName="GROSS_AMOUNT" direction="DESC"/>
+      <rankThreshold>
+        <value>5</value>
+      </rankThreshold>
+      <rankViewAttributeName>RANK</rankViewAttributeName>
+    </windowFunction>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Rank_1">
+  <attributes>
+    <attribute id="COUNTRY" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Rank_1" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="PRODUCT_ID" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_ID"/>
+      <keyMapping columnObjectName="Rank_1" columnName="PRODUCT_ID"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="GROSS_AMOUNT" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSS_AMOUNT"/>
+      <measureMapping columnObjectName="Rank_1" columnName="GROSS_AMOUNT"/>
+    </measure>
+    <measure id="RANK" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="RANK"/>
+      <measureMapping columnObjectName="Rank_1" columnName="RANK"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Rank_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="105" y="232"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

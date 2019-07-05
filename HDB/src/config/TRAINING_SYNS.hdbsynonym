@@ -1,0 +1,110 @@
+{
+  "HA300::SALES_DATA": {
+    "target": {
+      "object": "SALES_DATA",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::SALES_DATA_NEW": {
+    "target": {
+      "object": "SALES_DATA_NEW",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::HANA_SEARCH_DATA": {
+    "target": {
+      "object": "HANA_SEARCH_DATA",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::CUSTOMER": {
+    "target": {
+      "object": "CUSTOMER",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::PRODUCT": {
+    "target": {
+      "object": "PRODUCT",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::PRODUCT_GROUP": {
+    "target": {
+      "object": "PRODUCT_GROUP",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::ORDERS": {
+    "target": {
+      "object": "ORDERS",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::COUNTRIES": {
+    "target": {
+      "object": "COUNTRIES",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::BOOKS": {
+    "target": {
+      "object": "BOOKS",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::EMPLOYEE": {
+    "target": {
+      "object": "EMPLOYEE",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::EMPLOYEE_HIERARCHY": {
+    "target": {
+      "object": "EMPLOYEE_HIERARCHY",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::CCTR_COST": {
+    "target": {
+      "object": "CCTR_COST",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::CCTR_HIE_TIME": {
+    "target": {
+      "object": "CCTR_HIE_TIME",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::CITIES": {
+    "target": {
+      "object": "CITIES",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::CHURN_STATUS": {
+    "target": {
+      "object": "CHURN_STATUS",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::BANK_WITH_PARTITIONS": {
+    "target": {
+      "object": "BANK_WITH_PARTITIONS",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::BANK_UNPARTITIONED": {
+    "target": {
+      "object": "BANK_UNPARTITIONED",
+      "schema": "TRAINING"
+    }
+  },
+  "HA300::HIERARCHY_SOURCE_DATA": {
+    "target": {
+      "object": "HIERARCHY_SOURCE_DATA",
+      "schema": "TRAINING"
+    }
+  }
+} 

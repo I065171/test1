@@ -1,0 +1,52 @@
+{
+  "CROSS_SCHEMA_SERVICE":{
+    "object_owner":{
+      "schema_privileges":[  
+        {  
+          "reference":"TRAINING",
+          "privileges_with_grant_option":["SELECT", "SELECT METADATA"]
+        },
+        {  
+          "reference":"EPM_MODEL",
+          "privileges_with_grant_option":["SELECT", "SELECT METADATA"]
+        },
+        {  
+          "reference":"_SYS_BI",
+          "privileges_with_grant_option":["SELECT"]
+        },
+        {  
+          "reference":"TCUR",
+          "privileges_with_grant_option":["SELECT"]
+        },
+         {  
+          "reference":"FStats",
+          "privileges_with_grant_option":["SELECT", "SELECT METADATA"]
+        }
+      ]
+    },
+    "application_user":{
+      "schema_privileges":[ 
+        { 
+          "reference":"TRAINING",
+          "privileges":["SELECT", "SELECT METADATA"]
+        },
+        {  
+          "reference":"EPM_MODEL",
+          "privileges":["SELECT", "SELECT METADATA"]
+        },
+        {  
+          "reference":"_SYS_BI",
+          "privileges":["SELECT"]
+        },
+        {  
+          "reference":"TCUR",
+          "privileges":["SELECT"]
+        },
+        {  
+          "reference":"FStats",
+          "privileges":["SELECT", "SELECT METADATA"]
+        }
+      ]
+    }
+  }
+}

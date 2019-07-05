@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="HA300::CV_EMPLOYEE_HIER_00" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Employee Hierarchy"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::EMPLOYEE">
+    <resourceUri>HA300::EMPLOYEE</resourceUri>
+  </DataSource>
+  <DataSource id="HA300::EMPLOYEE_HIERARCHY">
+    <resourceUri>HA300::EMPLOYEE_HIERARCHY</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="DNUMBER" measureType="simple">
+        <descriptions defaultDescription="DNUMBER"/>
+      </viewAttribute>
+      <viewAttribute id="NAME" measureType="simple">
+        <descriptions defaultDescription="NAME"/>
+      </viewAttribute>
+      <viewAttribute id="REMAINDERDAYS" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="REMAINDERDAYS"/>
+      </viewAttribute>
+      <viewAttribute id="PARENT_DNUMBER" measureType="simple">
+        <descriptions defaultDescription="PARENT_DNUMBER"/>
+      </viewAttribute>
+      <viewAttribute id="VALID_FROM_DATE" measureType="simple">
+        <descriptions defaultDescription="VALID_FROM_DATE"/>
+      </viewAttribute>
+      <viewAttribute id="VALID_TO_DATE" measureType="simple">
+        <descriptions defaultDescription="VALID_TO_DATE"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::EMPLOYEE">
+      <mapping xsi:type="Calculation:AttributeMapping" target="DNUMBER" source="DNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="REMAINDERDAYS" source="REMAINDERDAYS"/>
+    </input>
+    <input node="HA300::EMPLOYEE_HIERARCHY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARENT_DNUMBER" source="PARENT_DNUMBER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_FROM_DATE" source="VALID_FROM_DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="VALID_TO_DATE" source="VALID_TO_DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DNUMBER" source="CHILD_DNUMBER"/>
+    </input>
+    <joinAttribute name="DNUMBER"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="DNUMBER" order="1" descriptionColumnName="NAME" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DNUMBER"/>
+      <keyMapping columnObjectName="Join_1" columnName="DNUMBER"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="PARENT_DNUMBER" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PARENT_DNUMBER"/>
+      <keyMapping columnObjectName="Join_1" columnName="PARENT_DNUMBER"/>
+    </attribute>
+    <attribute id="VALID_FROM_DATE" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_FROM_DATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="VALID_FROM_DATE"/>
+    </attribute>
+    <attribute id="VALID_TO_DATE" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="VALID_TO_DATE"/>
+      <keyMapping columnObjectName="Join_1" columnName="VALID_TO_DATE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="REMAINDERDAYS" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="REMAINDERDAYS"/>
+      <measureMapping columnObjectName="Join_1" columnName="REMAINDERDAYS"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions>
+    <localDimension id="EMPLOYEE_HIERARCHY">
+      <attributeRef xsi:type="DataFoundation:Attribute">DNUMBER</attributeRef>
+      <attributeRef xsi:type="DataFoundation:Attribute">PARENT_DNUMBER</attributeRef>
+      <hierarchies>
+        <hierarchy xsi:type="Dimension:ParentChildHierarchy" id="EMPLOYEE_HIERARCHY" aggregateAllNodes="true" orphanedNodesHandling="ROOT_NODES" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true" multipleParents="true">
+          <descriptions defaultDescription="Employee Parent-Child Hierarchy"/>
+          <unassignedMemberProperties mode="FALSE"/>
+          <attributeParentPair attribute="DNUMBER" parentAttribute="PARENT_DNUMBER"/>
+          <siblingOrder/>
+        </hierarchy>
+      </hierarchies>
+    </localDimension>
+  </localDimensions>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="185"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="HA300::EMPLOYEE" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="HA300::EMPLOYEE_HIERARCHY" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

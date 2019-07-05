@@ -1,0 +1,29 @@
+
+PROCEDURE "HA300::P_BOOKS_VAT_00"
+(IN tax DECIMAL(5,2),
+ OUT out_with_tax table
+  (ISBN VARCHAR (20),
+   TITLE VARCHAR (50),
+   PUBLISHER INT,
+   PRICE DECIMAL (33,2),
+   PRICE_VAT DECIMAL (33,2),
+   CURRENCY VARCHAR (3)
+  )
+)
+
+LANGUAGE SQLSCRIPT
+SQL SECURITY DEFINER
+READS SQL DATA AS
+
+/********* Begin Procedure Script ************/ 
+BEGIN 
+
+out_with_tax = SELECT ISBN,
+                      TITLE,
+                      PUBLISHER,
+                      PRICE,
+                      PRICE * :tax AS PRICE_VAT,
+                      CRCY AS CURRENCY
+               FROM "HA300::BOOKS";
+               
+               END

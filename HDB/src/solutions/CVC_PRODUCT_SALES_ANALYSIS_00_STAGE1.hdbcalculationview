@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:AccessControl="http://www.sap.com/ndb/SQLCoreModelAccessControl.ecore" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:Privilege="http://www.sap.com/ndb/BiModelPrivilege.ecore" id="HA300::CVC_PRODUCT_SALES_ANALYSIS_00_STAGE1" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" calculationScenarioType="TREE_BASED" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Product sales analysis"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::SALES_DATA">
+    <resourceUri>HA300::SALES_DATA</resourceUri>
+  </DataSource>
+  <DataSource id="HA300::PRODUCT">
+    <resourceUri>HA300::PRODUCT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_1" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="PRODUCT_TEXT" measureType="simple">
+        <descriptions defaultDescription="PRODUCT_TEXT"/>
+      </viewAttribute>
+      <viewAttribute id="CURRENCY" measureType="simple">
+        <descriptions defaultDescription="CURRENCY"/>
+      </viewAttribute>
+      <viewAttribute id="AMOUNT" aggregationType="sum" measureType="simple">
+        <descriptions defaultDescription="AMOUNT"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$PRODUCT_ID$PRODUCT_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::SALES_DATA">
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCT_ID$PRODUCT_ID" source="PRODUCT_ID"/>
+    </input>
+    <input node="HA300::PRODUCT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCT_TEXT" source="PRODUCT_TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCT_ID$PRODUCT_ID" source="PRODUCT_ID"/>
+    </input>
+    <joinAttribute name="JOIN$PRODUCT_ID$PRODUCT_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="PRODUCT_TEXT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCT_TEXT"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCT_TEXT"/>
+    </attribute>
+    <attribute id="CURRENCY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="TOTAL_SALES" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="TOTAL SALES"/>
+      <measureMapping columnObjectName="Join_1" columnName="AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures>
+    <measure id="INPUT_DEVICE_SALES" hidden="false" order="4" aggregationType="sum" datatype="DECIMAL" length="17" scale="2" baseMeasure="TOTAL_SALES">
+      <descriptions defaultDescription="Total Sales for Input Devices"/>
+      <restriction logicalOperator="AND">
+        <filter xsi:type="Privilege:AttributeFilter" attributeName="PRODUCT_TEXT">
+          <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Keyboard"/>
+        </filter>
+        <attributeName>PRODUCT_TEXT</attributeName>
+      </restriction>
+      <restriction logicalOperator="AND">
+        <filter xsi:type="Privilege:AttributeFilter" attributeName="PRODUCT_TEXT">
+          <valueFilter xsi:type="AccessControl:SingleValueFilter" including="true" value="Mouse"/>
+        </filter>
+        <attributeName>PRODUCT_TEXT</attributeName>
+      </restriction>
+      </measure>
+    <measure id="COMPUTER_SALES" hidden="false" order="5" aggregationType="sum" datatype="DECIMAL" length="17" scale="2" baseMeasure="TOTAL_SALES" restrictionExpressionLanguage="SQL">
+      <descriptions defaultDescription="Total Sales for Workstations and Laptops"/>
+      <restrictionExpression>&quot;PRODUCT_TEXT&quot; = 'Laptop' OR &quot;PRODUCT_TEXT&quot; LIKE '%station'</restrictionExpression>
+      </measure>
+  </restrictedMeasures>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="223"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="HA300::SALES_DATA" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="HA300::PRODUCT" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

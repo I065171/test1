@@ -1,0 +1,50 @@
+{
+  "HA300::Airports": {
+    "target": {
+      "object": "Airports",
+      "schema": "FStats"
+    }
+  },
+  "HA300::States": {
+    "target": {
+      "object": "States",
+      "schema": "FStats"
+    }
+  },
+  "HA300::Countries": {
+    "target": {
+      "object": "Countries",
+      "schema": "FStats"
+    }
+  },
+  "HA300::Delay_Groups_Text": {
+    "target": {
+      "object": "Delay_Groups_Text",
+      "schema": "FStats"
+    }
+  },
+  "HA300::Delay_Groups": {
+    "target": {
+      "object": "Delay_Groups",
+      "schema": "FStats"
+    }
+  },
+  "HA300::On_Time": {
+    "target": {
+      "object": "On_Time",
+      "schema": "FStats"
+    }
+  },
+  "HA300::Airlines": {
+    "target": {
+      "object": "Airlines",
+      "schema": "FStats"
+    }
+  },
+  "HA300::Costs": {
+    "target": {
+      "object": "Costs",
+      "schema": "FStats"
+    }
+  }
+}

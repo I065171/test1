@@ -1,0 +1,18 @@
+{
+    "format_version": 1,
+    "imports": [
+        {
+            "target_table": "HA300::Employees",
+            "source_data": {
+                "data_type": "CSV",
+                "file_name": "HA300::Employees.csv",
+                "has_header": true
+                           },
+            "import_settings": {
+                "import_columns": [
+                    "EmployeeID","Country","BankAccountNumber"
+                                  ]
+                               }
+        }
+               ]
+}

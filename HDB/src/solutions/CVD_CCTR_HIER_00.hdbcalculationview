@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" xmlns:DataFoundation="http://www.sap.com/ndb/BiModelDataFoundation.ecore" xmlns:Dimension="http://www.sap.com/ndb/BiModelDimension.ecore" id="HA300::CVD_CCTR_HIER_00" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Cost Center with Hierarchy"/>
+<localVariables>
+  <variable id="EFFECTIVE_DATE" parameter="true">
+    <descriptions defaultDescription="Hierarchy Effective Date"/>
+    <variableProperties datatype="DATE" mandatory="true">
+      <valueDomain type="Date"/>
+      <selection multiLine="false" type="Single"/>
+      <defaultRange lowValue="2015-01-01"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::CCTR_HIE_TIME">
+    <resourceUri>HA300::CCTR_HIE_TIME</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1" filterExpressionLanguage="SQL">
+    <viewAttributes>
+      <viewAttribute id="CCTR_CHILD">
+        <descriptions defaultDescription="CCTR_CHILD"/>
+      </viewAttribute>
+      <viewAttribute id="CCTR_PARENT">
+        <descriptions defaultDescription="CCTR_PARENT"/>
+      </viewAttribute>
+      <viewAttribute id="DATE_FROM">
+        <descriptions defaultDescription="DATE_FROM"/>
+      </viewAttribute>
+      <viewAttribute id="DATE_TO">
+        <descriptions defaultDescription="DATE_TO"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::CCTR_HIE_TIME">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CCTR_CHILD" source="CCTR_CHILD"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CCTR_PARENT" source="CCTR_PARENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATE_FROM" source="DATE_FROM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="DATE_TO" source="DATE_TO"/>
+    </input>
+    <filter>&quot;DATE_FROM&quot;&lt;='$$EFFECTIVE_DATE$$' AND &quot;DATE_TO&quot;&gt;= '$$EFFECTIVE_DATE$$'</filter>
+  </calculationView>
+</calculationViews>
+<inlineHierarchy xsi:type="Dimension:ParentChildHierarchy" id="HIER_CCTR_TIME_DEPENDENT" aggregateAllNodes="true" multipleParents="true" orphanedNodesHandling="IGNORE" rootNodeVisibility="ADD_ROOT_NODE_IF_DEFINED" cacheEnabled="true" cycleHandling="BREAKUP" emptyValueIsNull="true">
+  <descriptions defaultDescription="Time Dependent Cost Center Hierarchy"/>
+  <unassignedMemberProperties mode="FALSE"/>
+  <attributeParentPair attribute="CCTR_CHILD" parentAttribute="CCTR_PARENT"/>
+  <timeProperties>
+    <validFromElement xsi:type="DataFoundation:Attribute">DATE_FROM</validFromElement>
+    <validToElement xsi:type="DataFoundation:Attribute">DATE_TO</validToElement>
+    <pointInTimeVariable>EFFECTIVE_DATE</pointInTimeVariable>
+  </timeProperties>
+</inlineHierarchy>
+<logicalModel id="Projection_1">
+  <attributes>
+    <attribute id="CCTR_CHILD" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CCTR_CHILD"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CCTR_CHILD"/>
+    </attribute>
+    <attribute id="CCTR_PARENT" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CCTR_PARENT"/>
+      <keyMapping columnObjectName="Projection_1" columnName="CCTR_PARENT"/>
+    </attribute>
+    <attribute id="DATE_FROM" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_FROM"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DATE_FROM"/>
+    </attribute>
+    <attribute id="DATE_TO" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="DATE_TO"/>
+      <keyMapping columnObjectName="Projection_1" columnName="DATE_TO"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="215"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

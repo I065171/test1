@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="HA300::CV_CAMPAIGN_ANALYSIS_00_STAGE2" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" defaultClient="$$client$$" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Email Campaign Analysis"/>
+<localVariables>
+  <variable id="INP_EMAIL_DATE" parameter="true">
+    <descriptions defaultDescription="The date when the e-mail was sent"/>
+    <variableProperties datatype="DATE" mandatory="true">
+      <valueDomain type="StaticList">
+        <listEntry id="2012-01-25">
+          <descriptions defaultDescription="First e-mail"/>
+        </listEntry>
+        <listEntry id="2012-02-23">
+          <descriptions defaultDescription="Second e-mail"/>
+        </listEntry>
+      </valueDomain>
+      <selection multiLine="false" type="Single"/>
+    </variableProperties>
+  </variable>
+</localVariables>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::CUSTOMER">
+    <resourceUri>HA300::CUSTOMER</resourceUri>
+  </DataSource>
+  <DataSource id="HA300::SALES_DATA">
+    <resourceUri>HA300::SALES_DATA</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="CUSTOMER_TEXT">
+        <descriptions defaultDescription="CUSTOMER_TEXT"/>
+      </viewAttribute>
+      <viewAttribute id="CURRENCY">
+        <descriptions defaultDescription="CURRENCY"/>
+      </viewAttribute>
+      <viewAttribute id="AMOUNT" aggregationType="sum">
+        <descriptions defaultDescription="AMOUNT"/>
+      </viewAttribute>
+      <viewAttribute id="SQL_DATE">
+        <descriptions defaultDescription="SQL_DATE"/>
+      </viewAttribute>
+      <viewAttribute hidden="true" id="JOIN$CUSTOMER_ID$CUSTOMER_ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::CUSTOMER">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CUSTOMER_TEXT" source="CUSTOMER_TEXT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CUSTOMER_ID$CUSTOMER_ID" source="CUSTOMER_ID"/>
+    </input>
+    <input node="HA300::SALES_DATA">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="SQL_DATE" source="SQL_DATE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CUSTOMER_ID$CUSTOMER_ID" source="CUSTOMER_ID"/>
+    </input>
+    <joinAttribute name="JOIN$CUSTOMER_ID$CUSTOMER_ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CUSTOMER" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CUSTOMER"/>
+      <keyMapping columnObjectName="Join_1" columnName="CUSTOMER_TEXT"/>
+    </attribute>
+    <attribute id="CURRENCY" order="2" semanticType="currencyCode" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CURRENCY"/>
+    </attribute>
+  
+    <attribute id="SALE_DATE" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="SALE_DATE"/>
+  
+      <keyMapping columnObjectName="Join_1" columnName="SQL_DATE"/>
+  
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="DAYS_ELAPSED" order="5" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Days between Sale Date and e-mail"/>
+      <keyCalculation datatype="INTEGER" expressionLanguage="SQL">
+        <formula>DAYS_BETWEEN(&quot;SALE_DATE&quot;,TO_DATE('$$INP_EMAIL_DATE$$'))</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures>
+    <measure id="SALES_AMOUNT" order="3" semanticType="amount" aggregationType="sum" measureType="amount">
+      <descriptions defaultDescription="SALES_AMOUNT"/>
+      <unitCurrencyAttribute attributeName="CURRENCY"/>
+      <measureMapping columnObjectName="Join_1" columnName="AMOUNT"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="100" y="240"/>
+      <rectangleSize height="30" width="140"/>
+    </shape>
+    <shape modelObjectName="HA300::CUSTOMER" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="HA300::SALES_DATA" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

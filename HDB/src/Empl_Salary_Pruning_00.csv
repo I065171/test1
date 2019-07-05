@@ -1,0 +1,2 @@
+HA300::CVC_EMPL_SALARY_PRUNING_00,HA300::Empl_Salary_Current,Year,>=,2017,
+HA300::CVC_EMPL_SALARY_PRUNING_00,HA300::Empl_Salary_Historical,Year,<,2017,

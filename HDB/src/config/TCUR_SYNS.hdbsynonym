@@ -1,0 +1,50 @@
+{
+  "HA300::TCURC": {
+    "target": {
+      "object": "TCURC",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURF": {
+    "target": {
+      "object": "TCURF",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURN": {
+    "target": {
+      "object": "TCURN",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURR": {
+    "target": {
+      "object": "TCURR",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURT": {
+    "target": {
+      "object": "TCURT",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURV": {
+    "target": {
+      "object": "TCURV",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURW": {
+    "target": {
+      "object": "TCURW",
+      "schema": "TCUR"
+    }
+  },
+  "HA300::TCURX": {
+    "target": {
+      "object": "TCURX",
+      "schema": "TCUR"
+    }
+  }
+}

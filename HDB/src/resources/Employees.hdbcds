@@ -1,0 +1,8 @@
+namespace HA300;
+
+/*@@layout{"layoutInfo":{"x":-406,"y":-121.5}}*/
+entity Employees {
+    key EmployeeID        : Integer;
+        Country           : String(2);
+        BankAccountNumber : String(15);
+};

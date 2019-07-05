@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="HA300::CVD_BP" applyPrivilegeType="NONE" dataCategory="DIMENSION" dimensionType="STANDARD" schemaVersion="3.0" outputViewType="Projection" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CVD_BP"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="HA300::SNWD_BP">
+    <resourceUri>HA300::SNWD_BP</resourceUri>
+  </DataSource>
+  <DataSource id="HA300::SNWD_CONTACT">
+    <resourceUri>HA300::SNWD_CONTACT</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="CLIENT">
+        <descriptions defaultDescription="CLIENT"/>
+      </viewAttribute>
+      <viewAttribute id="NODE_KEY">
+        <descriptions defaultDescription="NODE_KEY"/>
+      </viewAttribute>
+      <viewAttribute id="BP_ID">
+        <descriptions defaultDescription="BP_ID"/>
+      </viewAttribute>
+      <viewAttribute id="BP_COMPANY_NAME">
+        <descriptions defaultDescription="BP_COMPANY_NAME"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::SNWD_BP">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENT" source="CLIENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NODE_KEY" source="NODE_KEY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BP_ID" source="BP_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BP_COMPANY_NAME" source="BP_COMPANY_NAME"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_2">
+    <viewAttributes>
+      <viewAttribute id="FIRST_NAME">
+        <descriptions defaultDescription="FIRST_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="LAST_NAME">
+        <descriptions defaultDescription="LAST_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="LANGUAGE">
+        <descriptions defaultDescription="LANGUAGE"/>
+      </viewAttribute>
+      <viewAttribute id="CLIENT">
+        <descriptions defaultDescription="CLIENT"/>
+      </viewAttribute>
+      <viewAttribute id="PARTNER_GUID">
+        <descriptions defaultDescription="PARTNER_GUID"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="HA300::SNWD_CONTACT">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRST_NAME" source="FIRST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LANGUAGE" source="LANGUAGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENT" source="CLIENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PARTNER_GUID" source="PARTNER_GUID"/>
+    </input>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="CLIENT">
+        <descriptions defaultDescription="CLIENT"/>
+      </viewAttribute>
+      <viewAttribute id="NODE_KEY">
+        <descriptions defaultDescription="NODE_KEY"/>
+      </viewAttribute>
+      <viewAttribute id="BP_ID">
+        <descriptions defaultDescription="BP_ID"/>
+      </viewAttribute>
+      <viewAttribute id="BP_COMPANY_NAME">
+        <descriptions defaultDescription="BP_COMPANY_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="FIRST_NAME">
+        <descriptions defaultDescription="FIRST_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="LAST_NAME">
+        <descriptions defaultDescription="LAST_NAME"/>
+      </viewAttribute>
+      <viewAttribute id="LANGUAGE">
+        <descriptions defaultDescription="LANGUAGE"/>
+      </viewAttribute>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENT" source="CLIENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NODE_KEY" source="NODE_KEY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BP_ID" source="BP_ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="BP_COMPANY_NAME" source="BP_COMPANY_NAME"/>
+    </input>
+    <input node="Projection_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="FIRST_NAME" source="FIRST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LAST_NAME" source="LAST_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LANGUAGE" source="LANGUAGE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CLIENT" source="CLIENT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NODE_KEY" source="PARTNER_GUID"/>
+    </input>
+    <joinAttribute name="CLIENT"/>
+    <joinAttribute name="NODE_KEY"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="CLIENT" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CLIENT"/>
+      <keyMapping columnObjectName="Join_1" columnName="CLIENT"/>
+    </attribute>
+    <attribute id="NODE_KEY" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NODE_KEY"/>
+      <keyMapping columnObjectName="Join_1" columnName="NODE_KEY"/>
+    </attribute>
+    <attribute id="BP_ID" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BP_ID"/>
+      <keyMapping columnObjectName="Join_1" columnName="BP_ID"/>
+    </attribute>
+    <attribute id="BP_COMPANY_NAME" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="BP_COMPANY_NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="BP_COMPANY_NAME"/>
+    </attribute>
+    <attribute id="FIRST_NAME" order="5" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FIRST_NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="FIRST_NAME"/>
+    </attribute>
+    <attribute id="LAST_NAME" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LAST_NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="LAST_NAME"/>
+    </attribute>
+    <attribute id="LANGUAGE" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LANGUAGE"/>
+      <keyMapping columnObjectName="Join_1" columnName="LANGUAGE"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="FULL_NAME" order="8" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="Full Name"/>
+      <keyCalculation datatype="VARCHAR" expressionLanguage="SQL" length="100">
+        <formula>&quot;FIRST_NAME&quot; || ' ' || &quot;LAST_NAME&quot;</formula>
+      </keyCalculation>
+      </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures/>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="356.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Projection_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="356.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+    <shape modelObjectName="Projection_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="250"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario> 
